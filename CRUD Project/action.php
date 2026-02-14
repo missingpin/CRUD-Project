@@ -37,7 +37,7 @@ if (isset($_POST['save_data'])) {
     if ($result) {
         $res = [
             'status' => 200,
-            'message' => 'Sumakses.'
+            'message' => 'Successfully Inserted.'
         ];
         echo json_encode($res);
         return;
