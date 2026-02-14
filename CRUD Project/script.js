@@ -19,9 +19,40 @@ $(document).on('click', '#btnDelete', function(e){
                 }
                 else{
                     alert(res.message);
-                    $('#information-table').load(location.href + "#information-table")
+                    $(' #table-information').load(location.href + " #table-information")
                 }
             }
         });
     }
 });
+
+$(document).on('submit', '#insert_data', function(e){   
+    e.preventDefault();
+
+    var formData = new FormData(this);
+    formData.append("save_data", true);
+
+    $.ajax({
+        type: "POST",
+        url: "action.php",
+        data: formData,
+        processData: false,
+        contentType: false,
+
+        success: function(response){
+            var res = JSON.parse(response);
+            if(res.status == 500){
+                alert(res.message);
+            }
+            else{
+                alert(res.message);
+                $(' #table-information').load(location.href + " #table-information")
+                $("exampleModal").hide();
+                $("#insert_data")[0].reset();
+                $('#exampleModal').modal('hide');
+                $('.modal-backdrop').remove();
+                $('body'),removeClass('modal-open');
+            }
+        }
+     });
+})
